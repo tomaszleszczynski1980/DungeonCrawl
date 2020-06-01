@@ -1,0 +1,15 @@
+obj
+obj/
+obj/*
+bin
+bin/
+bin/*
+.idea
+.idea/
+.idea/*
+
+.vs
+.vs/
+.vs/*
+
+*.sln
