@@ -1,4 +1,6 @@
-﻿using Codecool.DungeonCrawl.Logic;
+﻿using System.Collections.Generic;
+using Codecool.DungeonCrawl.Logic;
+using Codecool.DungeonCrawl.Logic.Actors;
 using Perlin;
 using Perlin.Display;
 using SixLabors.Fonts;
@@ -54,10 +56,13 @@ namespace Codecool.DungeonCrawl
             stage.AddChild(_mapContainer);
             DrawMap();
 
-            var skeletonGfx = new Sprite("tiles.png", false, Tiles.SkeletonTile);
-            skeletonGfx.X = _map.Skeleton.X * Tiles.TileWidth;
-            skeletonGfx.Y = _map.Skeleton.Y * Tiles.TileWidth;
-            stage.AddChild(skeletonGfx);
+            for (int index = 0; index < _map.Skeletons.Count; index++)
+            {
+                var skeletonGfx = new Sprite("tiles.png", false, Tiles.SkeletonTile);
+                skeletonGfx.X = _map.Skeletons[index].X * Tiles.TileWidth;
+                skeletonGfx.Y = _map.Skeletons[index].Y * Tiles.TileWidth;
+                stage.AddChild(skeletonGfx);
+            }
 
             _playerGfx = new Sprite("tiles.png", false, Tiles.PlayerTile);
             stage.AddChild(_playerGfx);

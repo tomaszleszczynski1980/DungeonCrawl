@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Codecool.DungeonCrawl.Logic.Actors;
 
 namespace Codecool.DungeonCrawl.Logic
@@ -15,7 +16,7 @@ namespace Codecool.DungeonCrawl.Logic
         /// <summary>
         /// A sample enemy
         /// </summary>
-        public Skeleton Skeleton;
+        public List<Skeleton> Skeletons;
         private readonly Cell[,] _cells;
 
         /// <summary>
