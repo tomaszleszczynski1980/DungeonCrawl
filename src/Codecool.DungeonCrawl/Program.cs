@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Codecool.DungeonCrawl.Logic;
 using Codecool.DungeonCrawl.Logic.Actors;
 using Perlin;
@@ -17,6 +18,7 @@ namespace Codecool.DungeonCrawl
         private TextField _healthTextField;
         private Sprite _mapContainer;
         private Sprite _playerGfx;
+        private List<Sprite> _skeletonsGfx;
 
         /// <summary>
         /// Entry point
@@ -56,12 +58,14 @@ namespace Codecool.DungeonCrawl
             stage.AddChild(_mapContainer);
             DrawMap();
 
+            _skeletonsGfx = new List<Sprite>();    // initialize skeletonsGfx list
+
             for (int index = 0; index < _map.Skeletons.Count; index++)
             {
-                var skeletonGfx = new Sprite("tiles.png", false, Tiles.SkeletonTile);
-                skeletonGfx.X = _map.Skeletons[index].X * Tiles.TileWidth;
-                skeletonGfx.Y = _map.Skeletons[index].Y * Tiles.TileWidth;
-                stage.AddChild(skeletonGfx);
+                _skeletonsGfx.Add(new Sprite("tiles.png", false, Tiles.SkeletonTile));
+                _skeletonsGfx[index].X = _map.Skeletons[index].X * Tiles.TileWidth;
+                _skeletonsGfx[index].Y = _map.Skeletons[index].Y * Tiles.TileWidth;
+                stage.AddChild(_skeletonsGfx[index]);
             }
 
             _playerGfx = new Sprite("tiles.png", false, Tiles.PlayerTile);
@@ -94,21 +98,53 @@ namespace Codecool.DungeonCrawl
             if (KeyboardInput.IsKeyPressedThisFrame(Key.Up))
             {
                 _map.Player.Move(0, -1);
+                Random rnd = new Random();
+
+                for (int index = 0; index < _map.Skeletons.Count; index++)
+                {
+                    _map.Skeletons[index].Move(rnd.Next(-1, 2), rnd.Next(-1, 2));
+                    _skeletonsGfx[index].X = _map.Skeletons[index].X * Tiles.TileWidth;
+                    _skeletonsGfx[index].Y = _map.Skeletons[index].Y * Tiles.TileWidth;
+                }
             }
 
             if (KeyboardInput.IsKeyPressedThisFrame(Key.Down))
             {
                 _map.Player.Move(0, 1);
+                Random rnd = new Random();
+
+                for (int index = 0; index < _map.Skeletons.Count; index++)
+                {
+                    _map.Skeletons[index].Move(rnd.Next(-1, 2), rnd.Next(-1, 2));
+                    _skeletonsGfx[index].X = _map.Skeletons[index].X * Tiles.TileWidth;
+                    _skeletonsGfx[index].Y = _map.Skeletons[index].Y * Tiles.TileWidth;
+                }
             }
 
             if (KeyboardInput.IsKeyPressedThisFrame(Key.Left))
             {
                 _map.Player.Move(-1, 0);
+                Random rnd = new Random();
+
+                for (int index = 0; index < _map.Skeletons.Count; index++)
+                {
+                    _map.Skeletons[index].Move(rnd.Next(-1, 2), rnd.Next(-1, 2));
+                    _skeletonsGfx[index].X = _map.Skeletons[index].X * Tiles.TileWidth;
+                    _skeletonsGfx[index].Y = _map.Skeletons[index].Y * Tiles.TileWidth;
+                }
             }
 
             if (KeyboardInput.IsKeyPressedThisFrame(Key.Right))
             {
                 _map.Player.Move(1, 0);
+                Random rnd = new Random();
+
+                for (int index = 0; index < _map.Skeletons.Count; index++)
+                {
+                    _map.Skeletons[index].Move(rnd.Next(-1, 2), rnd.Next(-1, 2));
+                    _skeletonsGfx[index].X = _map.Skeletons[index].X * Tiles.TileWidth;
+                    _skeletonsGfx[index].Y = _map.Skeletons[index].Y * Tiles.TileWidth;
+                }
             }
 
             // render changes
