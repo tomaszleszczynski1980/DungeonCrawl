@@ -1,3 +1,6 @@
+using System;
+using Veldrid;
+
 namespace Codecool.DungeonCrawl.Logic.Actors
 {
     /// <summary>
@@ -13,6 +16,17 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             : base(cell)
         {
         }
+
+        /// <summary>
+        /// Action taken on key pressed (Player).
+        /// Other sprites move on key pressed by player.
+        /// </summary>
+        /// <param name="k">key that is pressed</param>
+        // public void OnKey(Key k)
+        // {
+        //     Random rnd = new Random();
+        //     Move(rnd.Next(-1, 2), rnd.Next(-1, 2));
+        // }
 
         /// <inheritdoc/>
         public override string Tilename => "skeleton";

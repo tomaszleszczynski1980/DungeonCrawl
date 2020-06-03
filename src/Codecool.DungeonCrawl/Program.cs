@@ -19,7 +19,7 @@ namespace Codecool.DungeonCrawl
         private Sprite _mapContainer;
         private Sprite _playerGfx;
         private List<Sprite> _skeletonsGfx;
-        private Key[] _listenedKeys = new[] { Key.Up, Key.Down, Key.Left, Key.Right };
+        private Key[] _listenedKeys = { Key.Up, Key.Down, Key.Left, Key.Right };
 
         /// <summary>
         /// Event listening for key Pressed
@@ -105,62 +105,15 @@ namespace Codecool.DungeonCrawl
                 if (KeyboardInput.IsKeyPressedThisFrame(k))
                 {
                     OnKeyPressed?.Invoke(k);
+                    Random rnd = new Random();
+                    for (int index = 0; index < _map.Skeletons.Count; index++)
+                    {
+                        _map.Skeletons[index].Move(rnd.Next(-1, 2), rnd.Next(-1, 2));
+                        _skeletonsGfx[index].X = _map.Skeletons[index].X * Tiles.TileWidth;
+                        _skeletonsGfx[index].Y = _map.Skeletons[index].Y * Tiles.TileWidth;
+                    }
                 }
             }
-
-            // // process inputs
-            // // TODO: events
-            // if (KeyboardInput.IsKeyPressedThisFrame(Key.Up))
-            // {
-            //     _map.Player.Move(0, -1);
-            //     Random rnd = new Random();
-            //
-            //     for (int index = 0; index < _map.Skeletons.Count; index++)
-            //     {
-            //         _map.Skeletons[index].Move(rnd.Next(-1, 2), rnd.Next(-1, 2));
-            //         _skeletonsGfx[index].X = _map.Skeletons[index].X * Tiles.TileWidth;
-            //         _skeletonsGfx[index].Y = _map.Skeletons[index].Y * Tiles.TileWidth;
-            //     }
-            // }
-            //
-            // if (KeyboardInput.IsKeyPressedThisFrame(Key.Down))
-            // {
-            //     _map.Player.Move(0, 1);
-            //     Random rnd = new Random();
-            //
-            //     for (int index = 0; index < _map.Skeletons.Count; index++)
-            //     {
-            //         _map.Skeletons[index].Move(rnd.Next(-1, 2), rnd.Next(-1, 2));
-            //         _skeletonsGfx[index].X = _map.Skeletons[index].X * Tiles.TileWidth;
-            //         _skeletonsGfx[index].Y = _map.Skeletons[index].Y * Tiles.TileWidth;
-            //     }
-            // }
-            //
-            // if (KeyboardInput.IsKeyPressedThisFrame(Key.Left))
-            // {
-            //     _map.Player.Move(-1, 0);
-            //     Random rnd = new Random();
-            //
-            //     for (int index = 0; index < _map.Skeletons.Count; index++)
-            //     {
-            //         _map.Skeletons[index].Move(rnd.Next(-1, 2), rnd.Next(-1, 2));
-            //         _skeletonsGfx[index].X = _map.Skeletons[index].X * Tiles.TileWidth;
-            //         _skeletonsGfx[index].Y = _map.Skeletons[index].Y * Tiles.TileWidth;
-            //     }
-            // }
-            //
-            // if (KeyboardInput.IsKeyPressedThisFrame(Key.Right))
-            // {
-            //     _map.Player.Move(1, 0);
-            //     Random rnd = new Random();
-            //
-            //     for (int index = 0; index < _map.Skeletons.Count; index++)
-            //     {
-            //         _map.Skeletons[index].Move(rnd.Next(-1, 2), rnd.Next(-1, 2));
-            //         _skeletonsGfx[index].X = _map.Skeletons[index].X * Tiles.TileWidth;
-            //         _skeletonsGfx[index].Y = _map.Skeletons[index].Y * Tiles.TileWidth;
-            //     }
-            // }
 
             // render changes
             _playerGfx.X = _map.Player.X * Tiles.TileWidth;

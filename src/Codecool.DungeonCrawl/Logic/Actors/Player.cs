@@ -18,7 +18,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         }
 
         /// <summary>
-        /// Moethod on key Action.
+        /// Action taken on key pressed
         /// </summary>
         /// <param name="k">key that is pressed</param>
         public void OnKey(Key k)
