@@ -20,6 +20,7 @@ namespace Codecool.DungeonCrawl
         private Sprite _playerGfx;
         private List<Sprite> _skeletonsGfx;
         private Key[] _listenedKeys = { Key.Up, Key.Down, Key.Left, Key.Right };
+        private int _enemyDelay = 0;
 
         /// <summary>
         /// Event listening for key Pressed
@@ -105,15 +106,21 @@ namespace Codecool.DungeonCrawl
                 if (KeyboardInput.IsKeyPressedThisFrame(k))
                 {
                     OnKeyPressed?.Invoke(k);
-                    Random rnd = new Random();
-                    for (int index = 0; index < _map.Skeletons.Count; index++)
-                    {
-                        _map.Skeletons[index].Move(rnd.Next(-1, 2), rnd.Next(-1, 2));
-                        _skeletonsGfx[index].X = _map.Skeletons[index].X * Tiles.TileWidth;
-                        _skeletonsGfx[index].Y = _map.Skeletons[index].Y * Tiles.TileWidth;
-                    }
                 }
             }
+
+            if (_enemyDelay % 20 == 0)
+            {
+                Random rnd = new Random();
+                for (int index = 0; index < _map.Skeletons.Count; index++)
+                {
+                    _map.Skeletons[index].Move(rnd.Next(-1, 2), rnd.Next(-1, 2));
+                    _skeletonsGfx[index].X = _map.Skeletons[index].X * Tiles.TileWidth;
+                    _skeletonsGfx[index].Y = _map.Skeletons[index].Y * Tiles.TileWidth;
+                }
+            }
+
+            _enemyDelay++;
 
             // render changes
             _playerGfx.X = _map.Player.X * Tiles.TileWidth;
