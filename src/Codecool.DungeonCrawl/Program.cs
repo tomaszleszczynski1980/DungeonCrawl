@@ -20,7 +20,7 @@ namespace Codecool.DungeonCrawl
         private Sprite _playerGfx;
         private List<Sprite> _skeletonsGfx;
         private Key[] _listenedKeys = { Key.Up, Key.Down, Key.Left, Key.Right };
-        private int _enemyDelay = 0;
+        private int _fpsCounter = 0;
 
         /// <summary>
         /// Event listening for key Pressed
@@ -109,8 +109,12 @@ namespace Codecool.DungeonCrawl
                 }
             }
 
-            if (_enemyDelay % 20 == 0)
+            const int enemiesDelay = 25; // enemies will move once in 25 fps.
+
+            if (_fpsCounter % enemiesDelay == 0)
             {
+                _fpsCounter = 0;
+
                 Random rnd = new Random();
                 for (int index = 0; index < _map.Skeletons.Count; index++)
                 {
@@ -120,7 +124,7 @@ namespace Codecool.DungeonCrawl
                 }
             }
 
-            _enemyDelay++;
+            _fpsCounter++;
 
             // render changes
             _playerGfx.X = _map.Player.X * Tiles.TileWidth;
