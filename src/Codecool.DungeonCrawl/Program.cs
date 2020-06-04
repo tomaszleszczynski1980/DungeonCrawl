@@ -79,7 +79,7 @@ namespace Codecool.DungeonCrawl
 
             for (int index = 0; index < _map.Actors.Count; index++)
             {
-                _actorsGfx.Add(new Sprite("tiles.png", false, Tiles.SkeletonTile));
+                _actorsGfx.Add(new Sprite("tiles.png", false, Actor.Tile));
                 _actorsGfx[index].X = _map.Actors[index].X * Tiles.TileWidth;
                 _actorsGfx[index].Y = _map.Actors[index].Y * Tiles.TileWidth;
                 stage.AddChild(_actorsGfx[index]);
