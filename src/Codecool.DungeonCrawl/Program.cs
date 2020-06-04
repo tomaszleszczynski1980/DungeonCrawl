@@ -20,8 +20,10 @@ namespace Codecool.DungeonCrawl
         private GameMap _map;
         private TextField _healthTextField;
         private Sprite _mapContainer;
-        private Sprite _playerGfx;
-        private List<Sprite> _skeletonsGfx;
+        private List<Sprite> _actorsGfx;
+
+        // private Sprite _playerGfx;
+        // private List<Sprite> _skeletonsGfx;
         private Key[] _listenedKeys = { Key.Up, Key.Down, Key.Left, Key.Right };
         private int _fpsCounter = 0;
 
@@ -57,15 +59,15 @@ namespace Codecool.DungeonCrawl
             var stage = PerlinApp.Stage;
 
             // health textField
-            _healthTextField = new TextField(
-                PerlinApp.FontRobotoMono.CreateFont(14),
-                _map.Player.Health.ToString(),
-                false);
-            _healthTextField.HorizontalAlign = HorizontalAlignment.Center;
-            _healthTextField.Width = 100;
-            _healthTextField.Height = 20;
-            _healthTextField.X = _map.Width * Tiles.TileWidth / 2 - 50;
-            stage.AddChild(_healthTextField);
+            // _healthTextField = new TextField(
+            //     PerlinApp.FontRobotoMono.CreateFont(14),
+            //     _map.Player.Health.ToString(),
+            //     false);
+            // _healthTextField.HorizontalAlign = HorizontalAlignment.Center;
+            // _healthTextField.Width = 100;
+            // _healthTextField.Height = 20;
+            // _healthTextField.X = _map.Width * Tiles.TileWidth / 2 - 50;
+            // stage.AddChild(_healthTextField);
 
             stage.EnterFrameEvent += StageOnEnterFrameEvent;
 
@@ -73,18 +75,17 @@ namespace Codecool.DungeonCrawl
             stage.AddChild(_mapContainer);
             DrawMap();
 
-            _skeletonsGfx = new List<Sprite>();    // initialize skeletonsGfx list
+            _actorsGfx = new List<Sprite>();    // initialize actorsGfx list
 
-            for (int index = 0; index < _map.Skeletons.Count; index++)
+            for (int index = 0; index < _map.Actors.Count; index++)
             {
-                _skeletonsGfx.Add(new Sprite("tiles.png", false, Tiles.SkeletonTile));
-                _skeletonsGfx[index].X = _map.Skeletons[index].X * Tiles.TileWidth;
-                _skeletonsGfx[index].Y = _map.Skeletons[index].Y * Tiles.TileWidth;
-                stage.AddChild(_skeletonsGfx[index]);
+                // _playerGfx = new Sprite("tiles.png", false, Tiles.PlayerTile);
+                // _actorsGfx.Add(new Sprite("tiles.png", false, Tiles.SkeletonTile));
+                _actorsGfx.Add(new Sprite("tiles.png", false, Actor.Tile));
+                _actorsGfx[index].X = _map.Actors[index].X * Tiles.TileWidth;
+                _actorsGfx[index].Y = _map.Actors[index].Y * Tiles.TileWidth;
+                stage.AddChild(_actorsGfx[index]);
             }
-
-            _playerGfx = new Sprite("tiles.png", false, Tiles.PlayerTile);
-            stage.AddChild(_playerGfx);
         }
 
         private void DrawMap()
@@ -124,19 +125,19 @@ namespace Codecool.DungeonCrawl
                 _fpsCounter = 0;
 
                 Random rnd = new Random();
-                for (int index = 0; index < _map.Skeletons.Count; index++)
+                for (int index = 0; index < _map.Actors.Count; index++)
                 {
-                    _map.Skeletons[index].Move(rnd.Next(-1, 2), rnd.Next(-1, 2));
-                    _skeletonsGfx[index].X = _map.Skeletons[index].X * Tiles.TileWidth;
-                    _skeletonsGfx[index].Y = _map.Skeletons[index].Y * Tiles.TileWidth;
+                    _map.Actors[index].Move(rnd.Next(-1, 2), rnd.Next(-1, 2));
+                    _actorsGfx[index].X = _map.Actors[index].X * Tiles.TileWidth;
+                    _actorsGfx[index].Y = _map.Actors[index].Y * Tiles.TileWidth;
                 }
             }
 
             _fpsCounter++;
 
             // render changes
-            _playerGfx.X = _map.Player.X * Tiles.TileWidth;
-            _playerGfx.Y = _map.Player.Y * Tiles.TileWidth;
+            // _playerGfx.X = _map.Player.X * Tiles.TileWidth;
+            // _playerGfx.Y = _map.Player.Y * Tiles.TileWidth;
         }
     }
 }

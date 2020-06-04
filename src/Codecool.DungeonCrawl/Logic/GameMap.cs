@@ -16,7 +16,7 @@ namespace Codecool.DungeonCrawl.Logic
         /// <summary>
         /// A sample enemy
         /// </summary>
-        public List<Skeleton> Skeletons;
+        public List<Actor> Actors;
         private readonly Cell[,] _cells;
 
         /// <summary>

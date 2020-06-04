@@ -69,5 +69,8 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         /// Gets the name of this tile.
         /// </summary>
         public abstract string Tilename { get; }
+
+        // /// <inheritdoc/>
+        // public abstract Tiles Tile { get; }
     }
 }
