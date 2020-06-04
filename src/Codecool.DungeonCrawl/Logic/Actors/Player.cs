@@ -18,7 +18,8 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             : base(cell)
         {
             Program.OnKeyPressed += OnKey;
-
+            AttackStrength = 10;
+            Defence = 2;
             Health = 50;
         }
 
@@ -62,8 +63,8 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         {
             if (other.Tilename == "skeleton")
             {
-                other.Health -= 5;
-                return other.Health <= 0;
+                this.Health -= other.AttackStrength / this.Defence;
+                return this.Health <= 0;
             }
 
             return true;

@@ -15,7 +15,9 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public Skeleton(Cell cell)
             : base(cell)
         {
-            Health = 30;
+            AttackStrength = 5;
+            Defence = 3;
+            Health = 40;
         }
 
         /// <summary>
@@ -41,7 +43,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             }
             else if (other.Tilename == "player")
             {
-                this.Health -= 5;
+                this.Health -= other.AttackStrength / this.Defence;
                 return this.Health <= 0;
             }
 
