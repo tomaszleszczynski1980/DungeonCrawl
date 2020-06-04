@@ -11,9 +11,9 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public Cell Cell { get; private set; }
 
         /// <summary>
-        /// Gets this actors health
+        /// Gets or sets this actors health
         /// </summary>
-        public int Health { get; private set; }
+        public int Health { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Actor"/> class.
@@ -23,6 +23,8 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         {
             Cell = cell;
             Cell.Actor = this;
+
+            // Program.Collision += Collision();
         }
 
         /// <summary>
@@ -33,12 +35,24 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public void Move(int dx, int dy)
         {
             Cell nextCell = Cell.GetNeighbor(dx, dy);
-            if (nextCell.Type != CellType.Wall)
+            if (nextCell.Passable)
             {
-                Cell.Actor = null;
-                nextCell.Actor = this;
-                Cell = nextCell;
+                // if (nextCell.Actor != null && nextCell.Actor.OnCollision(this))
+                if (nextCell.Actor?.OnCollision(this) ?? true)
+                {
+                    Cell.Actor = null;
+                    nextCell.Actor = this;
+                    Cell = nextCell;
+                }
             }
+        }
+
+        /// <summary>
+        /// Actors Collision.
+        /// </summary>
+        public virtual bool OnCollision(Actor other)
+        {
+            return true;
         }
 
         /// <summary>

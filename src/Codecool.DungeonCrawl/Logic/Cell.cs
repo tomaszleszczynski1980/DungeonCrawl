@@ -10,6 +10,11 @@ namespace Codecool.DungeonCrawl.Logic
         private readonly GameMap _gameMap;
 
         /// <summary>
+        /// Gets Passable
+        /// </summary>
+        public bool Passable => Type != CellType.Wall;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Cell"/> class.
         /// </summary>
         /// <param name="gameMap">The game map</param>

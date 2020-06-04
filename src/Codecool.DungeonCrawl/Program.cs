@@ -14,6 +14,9 @@ namespace Codecool.DungeonCrawl
     /// </summary>
     public class Program
     {
+        /// <summary>
+        /// _map
+        /// </summary>
         private GameMap _map;
         private TextField _healthTextField;
         private Sprite _mapContainer;
@@ -26,6 +29,11 @@ namespace Codecool.DungeonCrawl
         /// Event listening for key Pressed
         /// </summary>
         public static event Action<Key> OnKeyPressed;
+
+        /// <summary>
+        /// Event listening for key Pressed
+        /// </summary>
+        public static event Action<Actor> Collision;
 
         /// <summary>
         /// Entry point
@@ -109,7 +117,7 @@ namespace Codecool.DungeonCrawl
                 }
             }
 
-            const int enemiesDelay = 25; // enemies will move once in 25 fps.
+            const int enemiesDelay = 25; // enemies will move once in 25 frames.
 
             if (_fpsCounter % enemiesDelay == 0)
             {
