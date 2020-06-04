@@ -10,7 +10,7 @@ namespace Codecool.DungeonCrawl.Logic
         private readonly GameMap _gameMap;
 
         /// <summary>
-        /// Gets Passable
+        /// Gets a value indicating whether gets Passable
         /// </summary>
         public bool Passable => Type != CellType.Wall;
 
