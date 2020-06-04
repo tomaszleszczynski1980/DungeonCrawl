@@ -23,7 +23,7 @@ namespace Codecool.DungeonCrawl.Logic
             var height = int.Parse(dimensions[1]);
 
             GameMap map = new GameMap(width, height, CellType.Empty);
-            map.Skeletons = new List<Skeleton>();     // initialize new List of Sekelton(s) objects
+            map.Actors = new List<Actor>();     // initialize new List of Actors objects
             for (var y = 0; y < height; y++)
             {
                 var line = lines[y + 1];
@@ -43,16 +43,16 @@ namespace Codecool.DungeonCrawl.Logic
                             case '.':
                                 cell.Type = CellType.Floor;
                                 break;
-                            case 's':
-                                cell.Type = CellType.Floor;
-                                Skeleton skeleton = new Skeleton(cell);
-                                map.Skeletons.Add(skeleton);
-                                break;
                             case '@':
                                 cell.Type = CellType.Floor;
-                                map.Player = new Player(cell);
+                                Player player = new Player(cell, Tiles.PlayerTile);
+                                map.Actors.Add(player);
                                 break;
-
+                            case 's':
+                                cell.Type = CellType.Floor;
+                                Skeleton skeleton = new Skeleton(cell, Tiles.SkeletonTile);
+                                map.Actors.Add(skeleton);
+                                break;
                             case '$':
                                 cell.Type = CellType.Portal;
                                 break;

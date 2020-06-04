@@ -14,13 +14,16 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         /// Initializes a new instance of the <see cref="Player"/> class.
         /// </summary>
         /// <param name="cell">The starting cell</param>
-        public Player(Cell cell)
-            : base(cell)
+        public Player(Cell cell, Perlin.Geom.Rectangle tile)
+            : base(cell, tile)
         {
             Program.OnKeyPressed += OnKey;
-
+            this.Tile = Tiles.PlayerTile;
             Health = 50;
+            _attackStrength = 5;
         }
+
+        private int _attackStrength;
 
         /// <inheritdoc/>
         public override void OnEnter(Cell cell)
@@ -62,7 +65,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         {
             if (other.Tilename == "skeleton")
             {
-                other.Health -= 5;
+                other.Health -= _attackStrength;
                 return other.Health <= 0;
             }
 

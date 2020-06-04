@@ -1,3 +1,5 @@
+using Veldrid;
+
 namespace Codecool.DungeonCrawl.Logic.Actors
 {
     /// <summary>
@@ -16,13 +18,19 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public int Health { get; set; }
 
         /// <summary>
+        /// Players tile
+        /// </summary>
+        public Perlin.Geom.Rectangle Tile;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Actor"/> class.
         /// </summary>
         /// <param name="cell">The cell of this actor</param>
-        public Actor(Cell cell)
+        public Actor(Cell cell, Perlin.Geom.Rectangle tile)
         {
             Cell = cell;
             Cell.Actor = this;
+            this.Tile = tile;
 
             // Program.Collision += Collision();
         }

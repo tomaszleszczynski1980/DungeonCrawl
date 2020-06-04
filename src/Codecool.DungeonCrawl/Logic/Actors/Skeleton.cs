@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using Veldrid;
 
 namespace Codecool.DungeonCrawl.Logic.Actors
@@ -12,11 +13,15 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         /// Initializes a new instance of the <see cref="Skeleton"/> class.
         /// </summary>
         /// <param name="cell">The starting cell</param>
-        public Skeleton(Cell cell)
-            : base(cell)
+        public Skeleton(Cell cell, Perlin.Geom.Rectangle tile)
+            : base(cell, tile)
         {
+            this.Tile = Tiles.SkeletonTile;
             Health = 30;
+            _attackStrenght = 10;
         }
+
+        private int _attackStrenght;
 
         /// <summary>
         /// Gets action taken on key pressed (Player).
@@ -41,7 +46,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             }
             else if (other.Tilename == "player")
             {
-                this.Health -= 5;
+                other.Health -= _attackStrenght;
                 return this.Health <= 0;
             }
 

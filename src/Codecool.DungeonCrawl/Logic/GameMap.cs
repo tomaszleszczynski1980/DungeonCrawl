@@ -9,14 +9,9 @@ namespace Codecool.DungeonCrawl.Logic
     public class GameMap
     {
         /// <summary>
-        /// The player
-        /// </summary>
-        public Player Player;
-
-        /// <summary>
         /// A sample enemy
         /// </summary>
-        public List<Skeleton> Skeletons;
+        public List<Actor> Actors;
         private readonly Cell[,] _cells;
 
         /// <summary>
