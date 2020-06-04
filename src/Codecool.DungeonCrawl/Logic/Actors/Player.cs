@@ -1,4 +1,7 @@
+using System.Net.Mime;
 using Veldrid;
+using Perlin;
+using Perlin.Display;
 
 namespace Codecool.DungeonCrawl.Logic.Actors
 {
@@ -17,6 +20,15 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             Program.OnKeyPressed += OnKey;
 
             Health = 50;
+        }
+
+        /// <inheritdoc/>
+        public override void OnEnter(Cell cell)
+        {
+            if (cell.Tilename == "Portal")
+            {
+                System.Environment.Exit(0);
+            }
         }
 
         /// <summary>

@@ -1,6 +1,7 @@
 using System.IO;
 using System.Collections.Generic;
 using Codecool.DungeonCrawl.Logic.Actors;
+using Vulkan;
 
 namespace Codecool.DungeonCrawl.Logic
 {
@@ -50,6 +51,10 @@ namespace Codecool.DungeonCrawl.Logic
                             case '@':
                                 cell.Type = CellType.Floor;
                                 map.Player = new Player(cell);
+                                break;
+
+                            case '$':
+                                cell.Type = CellType.Portal;
                                 break;
                             default:
                                 throw new InvalidDataException($"Unrecognized character: '{line[x]}'");
