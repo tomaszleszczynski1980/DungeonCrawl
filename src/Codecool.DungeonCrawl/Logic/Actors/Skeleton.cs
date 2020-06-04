@@ -19,7 +19,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         }
 
         /// <summary>
-        /// Action taken on key pressed (Player).
+        /// Gets action taken on key pressed (Player).
         /// Other sprites move on key pressed by player.
         /// </summary>
         /// <param name="k">key that is pressed</param>

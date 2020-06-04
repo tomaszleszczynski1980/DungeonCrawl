@@ -43,6 +43,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
                     Cell.Actor = null;
                     nextCell.Actor = this;
                     Cell = nextCell;
+                    OnEnter(Cell);
                 }
             }
         }
@@ -53,6 +54,14 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public virtual bool OnCollision(Actor other)
         {
             return true;
+        }
+
+        /// <summary>
+        /// On enter finish.
+        /// </summary>
+        public virtual void OnEnter(Cell cell)
+        {
+            return;
         }
 
         /// <summary>

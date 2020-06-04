@@ -31,6 +31,7 @@ namespace Codecool.DungeonCrawl
             TileMap["empty"] = CreateTile(0, 0);
             TileMap["wall"] = CreateTile(10, 17);
             TileMap["floor"] = CreateTile(2, 0);
+            TileMap["portal"] = CreateTile(22, 11);
         }
 
         /// <summary>
