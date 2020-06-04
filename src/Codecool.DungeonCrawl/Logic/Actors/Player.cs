@@ -1,3 +1,4 @@
+using Perlin.Display;
 using Veldrid;
 
 namespace Codecool.DungeonCrawl.Logic.Actors
@@ -11,11 +12,10 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         /// Initializes a new instance of the <see cref="Player"/> class.
         /// </summary>
         /// <param name="cell">The starting cell</param>
-        public Player(Cell cell)
-            : base(cell)
+        public Player(Cell cell, Stage stage)
+            : base(cell, stage, Tiles.PlayerTile)
         {
             Program.OnKeyPressed += OnKey;
-
             Health = 50;
         }
 

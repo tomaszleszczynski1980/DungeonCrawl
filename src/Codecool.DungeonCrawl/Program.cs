@@ -20,7 +20,6 @@ namespace Codecool.DungeonCrawl
         private GameMap _map;
         private TextField _healthTextField;
         private Sprite _mapContainer;
-        private List<Sprite> _actorsGfx;
 
         // private Sprite _playerGfx;
         // private List<Sprite> _skeletonsGfx;
@@ -74,18 +73,7 @@ namespace Codecool.DungeonCrawl
             _mapContainer = new Sprite();
             stage.AddChild(_mapContainer);
             DrawMap();
-
-            _actorsGfx = new List<Sprite>();    // initialize actorsGfx list
-
-            for (int index = 0; index < _map.Actors.Count; index++)
-            {
-                // _playerGfx = new Sprite("tiles.png", false, Tiles.PlayerTile);
-                // _actorsGfx.Add(new Sprite("tiles.png", false, Tiles.SkeletonTile));
-                _actorsGfx.Add(new Sprite("tiles.png", false, Actor.Tile));
-                _actorsGfx[index].X = _map.Actors[index].X * Tiles.TileWidth;
-                _actorsGfx[index].Y = _map.Actors[index].Y * Tiles.TileWidth;
-                stage.AddChild(_actorsGfx[index]);
-            }
+            MapLoader.CreateActors(_map);
         }
 
         private void DrawMap()
@@ -120,18 +108,18 @@ namespace Codecool.DungeonCrawl
 
             const int enemiesDelay = 25; // enemies will move once in 25 frames.
 
-            if (_fpsCounter % enemiesDelay == 0)
-            {
-                _fpsCounter = 0;
-
-                Random rnd = new Random();
-                for (int index = 0; index < _map.Actors.Count; index++)
-                {
-                    _map.Actors[index].Move(rnd.Next(-1, 2), rnd.Next(-1, 2));
-                    _actorsGfx[index].X = _map.Actors[index].X * Tiles.TileWidth;
-                    _actorsGfx[index].Y = _map.Actors[index].Y * Tiles.TileWidth;
-                }
-            }
+            // if (_fpsCounter % enemiesDelay == 0)
+            // {
+            //     _fpsCounter = 0;
+            //
+            //     Random rnd = new Random();
+            //     for (int index = 0; index < _map.Actors.Count; index++)
+            //     {
+            //         _map.Actors[index].Move(rnd.Next(-1, 2), rnd.Next(-1, 2));
+            //         _actorsGfx[index].X = _map.Actors[index].X * Tiles.TileWidth;
+            //         _actorsGfx[index].Y = _map.Actors[index].Y * Tiles.TileWidth;
+            //     }
+            // }
 
             _fpsCounter++;
 

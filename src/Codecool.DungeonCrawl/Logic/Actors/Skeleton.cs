@@ -1,4 +1,5 @@
 using System;
+using Perlin.Display;
 using Veldrid;
 
 namespace Codecool.DungeonCrawl.Logic.Actors
@@ -12,8 +13,8 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         /// Initializes a new instance of the <see cref="Skeleton"/> class.
         /// </summary>
         /// <param name="cell">The starting cell</param>
-        public Skeleton(Cell cell)
-            : base(cell)
+        public Skeleton(Cell cell, Stage stage)
+            : base(cell, stage, Tiles.SkeletonTile)
         {
             Health = 30;
         }

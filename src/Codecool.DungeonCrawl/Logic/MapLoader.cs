@@ -1,6 +1,7 @@
 using System.IO;
 using System.Collections.Generic;
 using Codecool.DungeonCrawl.Logic.Actors;
+using Perlin;
 
 namespace Codecool.DungeonCrawl.Logic
 {
@@ -22,7 +23,20 @@ namespace Codecool.DungeonCrawl.Logic
             var height = int.Parse(dimensions[1]);
 
             GameMap map = new GameMap(width, height, CellType.Empty);
-            map.Actors = new List<Actor>();     // initialize new List of Actors objects
+            return map;
+        }
+
+        /// <summary>
+        /// Creates Actors on Game Map
+        /// </summary>
+        /// <param name="map">map</param>
+        public static void CreateActors(GameMap map)
+        {
+            var lines = File.ReadAllLines("map.txt");
+            var dimensions = lines[0].Split(" ");
+            var width = int.Parse(dimensions[0]);
+            var height = int.Parse(dimensions[1]);
+            map.Actors = new List<Actor>(); // initialize new List of Actors objects
             for (var y = 0; y < height; y++)
             {
                 var line = lines[y + 1];
@@ -44,12 +58,12 @@ namespace Codecool.DungeonCrawl.Logic
                                 break;
                             case 's':
                                 cell.Type = CellType.Floor;
-                                Skeleton skeleton = new Skeleton(cell);
+                                Skeleton skeleton = new Skeleton(cell, PerlinApp.Stage);
                                 map.Actors.Add(skeleton);
                                 break;
                             case '@':
                                 cell.Type = CellType.Floor;
-                                Player player = new Player(cell);
+                                Player player = new Player(cell, PerlinApp.Stage);
                                 map.Actors.Add(player);
                                 break;
                             default:
@@ -59,7 +73,10 @@ namespace Codecool.DungeonCrawl.Logic
                 }
             }
 
-            return map;
+            foreach (Actor actor in map.Actors)
+            {
+                PerlinApp.Stage.AddChild(actor.Gfx);
+            }
         }
     }
 }

@@ -1,3 +1,6 @@
+using Perlin.Display;
+using Perlin.Geom;
+
 namespace Codecool.DungeonCrawl.Logic.Actors
 {
     /// <summary>
@@ -19,10 +22,15 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         /// Initializes a new instance of the <see cref="Actor"/> class.
         /// </summary>
         /// <param name="cell">The cell of this actor</param>
-        public Actor(Cell cell)
+        public Actor(Cell cell, Stage stage, Rectangle tile)
         {
             Cell = cell;
             Cell.Actor = this;
+            Gfx = new Sprite("tiles.png", false, tile);
+            Gfx.X = this.X * Tiles.TileWidth;
+            Gfx.Y = this.Y * Tiles.TileWidth;
+
+            // stage.AddChild(Gfx);
 
             // Program.Collision += Collision();
         }
@@ -69,6 +77,11 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         /// Gets the name of this tile.
         /// </summary>
         public abstract string Tilename { get; }
+
+        /// <summary>
+        /// Gets or sets reference to Sprite.
+        /// </summary>
+        public Sprite Gfx { get; set; }
 
         // /// <inheritdoc/>
         // public abstract Tiles Tile { get; }
