@@ -15,6 +15,8 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             : base(cell)
         {
             Program.OnKeyPressed += OnKey;
+
+            Health = 50;
         }
 
         /// <summary>
@@ -42,5 +44,17 @@ namespace Codecool.DungeonCrawl.Logic.Actors
 
         /// <inheritdoc/>
         public override string Tilename => "player";
+
+        /// <inheritdoc/>
+        public override bool OnCollision(Actor other)
+        {
+            if (other.Tilename == "skeleton")
+            {
+                other.Health -= 5;
+                return other.Health <= 0;
+            }
+
+            return true;
+        }
     }
 }
