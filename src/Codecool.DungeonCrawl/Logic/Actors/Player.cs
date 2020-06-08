@@ -12,8 +12,8 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         /// Initializes a new instance of the <see cref="Player"/> class.
         /// </summary>
         /// <param name="cell">The starting cell</param>
-        public Player(Cell cell, Stage stage)
-            : base(cell, stage, Tiles.PlayerTile)
+        public Player(Cell cell, DisplayObject parent)
+            : base(cell, parent, Tiles.PlayerTile)
         {
             Program.OnKeyPressed += OnKey;
             Health = 50;

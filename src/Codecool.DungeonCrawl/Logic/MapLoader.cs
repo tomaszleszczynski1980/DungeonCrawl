@@ -58,12 +58,12 @@ namespace Codecool.DungeonCrawl.Logic
                                 break;
                             case 's':
                                 cell.Type = CellType.Floor;
-                                Skeleton skeleton = new Skeleton(cell, PerlinApp.Stage);
+                                Skeleton skeleton = new Skeleton(cell, Program.Singleton.MapContainer);
                                 map.Actors.Add(skeleton);
                                 break;
                             case '@':
                                 cell.Type = CellType.Floor;
-                                Player player = new Player(cell, PerlinApp.Stage);
+                                Player player = new Player(cell, Program.Singleton.MapContainer);
                                 map.Actors.Add(player);
                                 break;
                             default:
@@ -75,7 +75,7 @@ namespace Codecool.DungeonCrawl.Logic
 
             foreach (Actor actor in map.Actors)
             {
-                PerlinApp.Stage.AddChild(actor.Gfx);
+                Program.Singleton.MapContainer.AddChild(actor.Gfx);
             }
         }
     }

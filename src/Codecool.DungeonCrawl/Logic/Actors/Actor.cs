@@ -22,7 +22,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         /// Initializes a new instance of the <see cref="Actor"/> class.
         /// </summary>
         /// <param name="cell">The cell of this actor</param>
-        public Actor(Cell cell, Stage stage, Rectangle tile)
+        public Actor(Cell cell, DisplayObject parent, Rectangle tile)
         {
             Cell = cell;
             Cell.Actor = this;
@@ -30,7 +30,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             Gfx.X = this.X * Tiles.TileWidth;
             Gfx.Y = this.Y * Tiles.TileWidth;
 
-            // stage.AddChild(Gfx);
+            parent.AddChild(Gfx);
 
             // Program.Collision += Collision();
         }

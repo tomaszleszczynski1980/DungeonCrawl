@@ -14,12 +14,15 @@ namespace Codecool.DungeonCrawl
     /// </summary>
     public class Program
     {
+        public static Program Singleton { get; private set; }
+        
         /// <summary>
         /// _map
         /// </summary>
         private GameMap _map;
         private TextField _healthTextField;
-        private Sprite _mapContainer;
+
+        public Sprite MapContainer { get; private set; }
 
         // private Sprite _playerGfx;
         // private List<Sprite> _skeletonsGfx;
@@ -41,16 +44,21 @@ namespace Codecool.DungeonCrawl
         /// </summary>
         public static void Main()
         {
-            new Program();
+            Singleton = new Program();
+            Singleton.Start();
+        }
+
+        private void Start()
+        {
+            PerlinApp.Start(_map.Width * Tiles.TileWidth,
+                _map.Height * Tiles.TileWidth,
+                "Dungeon Crawl",
+                OnStart); 
         }
 
         private Program()
         {
             _map = MapLoader.LoadMap();
-            PerlinApp.Start(_map.Width * Tiles.TileWidth,
-                _map.Height * Tiles.TileWidth,
-                "Dungeon Crawl",
-                OnStart);
         }
 
         private void OnStart()
@@ -70,15 +78,15 @@ namespace Codecool.DungeonCrawl
 
             stage.EnterFrameEvent += StageOnEnterFrameEvent;
 
-            _mapContainer = new Sprite();
-            stage.AddChild(_mapContainer);
+            MapContainer = new Sprite();
+            stage.AddChild(MapContainer);
             DrawMap();
             MapLoader.CreateActors(_map);
         }
 
         private void DrawMap()
         {
-            _mapContainer.RemoveAllChildren();
+            MapContainer.RemoveAllChildren();
             for (int x = 0; x < _map.Width; x++)
             {
                 for (int y = 0; y < _map.Height; y++)
@@ -90,7 +98,7 @@ namespace Codecool.DungeonCrawl
                     var sp = new Sprite("tiles.png", false, tile);
                     sp.X = x * Tiles.TileWidth;
                     sp.Y = y * Tiles.TileWidth;
-                    _mapContainer.AddChild(sp);
+                    MapContainer.AddChild(sp);
                 }
             }
         }
